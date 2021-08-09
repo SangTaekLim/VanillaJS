@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        window.onload = function () {
+
+            // 이벤트 함수 생성
+            function EventAt(className) {
+                this.className = className;
+            }
+
+            // 버튼 생성 이벤트
+            EventAt.prototype.add = function () {
+                var item = document.createElement('button');
+                var itemText = document.createTextNode('액션');
+                item.setAttribute("type", "button");
+                item.setAttribute("class", this.className);
+                item.appendChild(itemText);
+                document.body.appendChild(item);
+            }
+
+            // 생성된 버튼 이벤트
+            EventAt.prototype.action = function () {
+                alert("잘하자");
+            }
+
+            // 오브젝트 생성
+            var addObj = new EventAt("active");
+            var addBtn = document.getElementById("add");
+
+            //  버튼 생성이벤트
+            addBtn.addEventListener("click", function () {
+                addObj.add();
+            }, false);
+
+            // Array.prototype.forEach.call(actionBtn, function (obj) {
+            //     obj.addEventListener('click', function (e) {
+            //         e.preventDefault();
+            //         console.log(123);
+            //     })
+            // })
+
+
+            // 동적 생성 버트 이벤트 
+            document.body.addEventListener('click', function (e) {
+                var Boom = e.target.className == "btn" || e.target.className == "active" ? addObj.action() : "";
+                //console.log(e.target.className);
+            }, false);
+
+        }
+
+
+    </script>
+</head>
+
+<body>
+
+    <button type="button" id="add">추가</button>
+    <button type="button" class="btn">액션</button>
+    <button type="button" class="btn">액션</button>
+
+</body>
+
+</html>
